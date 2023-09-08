@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using WebApplication1.Data;
+
+
+
 namespace WebApplication1
 {
     public class Program
@@ -8,6 +13,11 @@ namespace WebApplication1
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<BloggieDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("BlogsMVCConnectionString"));
+            });
 
             var app = builder.Build();
 
