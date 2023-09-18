@@ -92,6 +92,25 @@ namespace WebApplication1.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult Delete(EditTagRequest editTagRequest)
+        {
+            var tag = bloggieDbContext.Tags.Find(editTagRequest.Id);
+
+            if (tag != null)
+            {
+                bloggieDbContext.Tags.Remove(tag);
+                bloggieDbContext.SaveChanges();
+
+                //As for the future -> here we will show success message
+                return RedirectToAction("List");
+
+            }
+
+            //Show error message
+            return RedirectToAction("Edit", new {id = editTagRequest.Id});
+        }
+
 
     }
 
