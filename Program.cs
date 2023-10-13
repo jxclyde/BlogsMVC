@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
-
+using WebApplication1.Repositories;
 
 
 namespace WebApplication1
@@ -18,6 +18,8 @@ namespace WebApplication1
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("BlogsMVCConnectionString"));
             });
+
+            builder.Services.AddScoped<ITagRepository, TagRepository>();
 
             var app = builder.Build();
 
